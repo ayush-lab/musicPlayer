@@ -1,0 +1,14 @@
+.main{
+    width:80vw;
+    height:100%;
+    display:flex;
+}
+
+.main_home{
+    width: 50%;
+}
+
+.main_musicPlayer{
+    width: 50%;
+    /* background:pink; */
+}

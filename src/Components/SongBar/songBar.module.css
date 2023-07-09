@@ -1,0 +1,36 @@
+.bar{
+    font-family: BasierCircle;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom:32px;
+}
+
+.artist_detail{
+    display:flex;
+    gap:16px;
+}
+
+.artist_name h3{
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.artist_detail p{
+    font-size: 14px;
+    font-weight: 200;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+    opacity: 0.6;
+}
+
+.song_time{
+    width: 34px;
+    height: 24px;
+    opacity: 0.6;
+
+}
