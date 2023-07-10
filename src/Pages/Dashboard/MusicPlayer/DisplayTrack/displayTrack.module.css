@@ -1,0 +1,38 @@
+.picture{
+    width: 400px;
+    height: 400px;
+    min-width:350px;
+    min-height:350px;
+}
+.picture img{
+    width: 100%;
+    border-radius: 8px;
+
+}
+
+
+.displayTrack{
+  
+}
+
+.displayDetails{
+    margin-top: 80px;
+    text-decoration: capitalize;
+    margin-bottom: 24px;
+}
+
+.displayDetails h2{
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: 0em;
+    margin-bottom:4px;
+}
+.displayDetails p{
+    font-size: 16px;
+    font-weight: 200;
+    font-style: normal;
+    line-height: 24px;
+    letter-spacing: 0em;
+    opacity: 0.6;
+}

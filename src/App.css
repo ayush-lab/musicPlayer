@@ -16,11 +16,14 @@
   height: auto;
   width: 20vw;
   transition: all 0.5s;
+  padding-left:12px;
 }
 .top_section{
   display: flex;
   align-items:center;
-  padding:20px 15px;
+  /* padding:20px 15px; */
+  padding-left:15px;
+  height:80px;
 }
 
 .link{
