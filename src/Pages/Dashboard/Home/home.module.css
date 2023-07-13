@@ -24,3 +24,24 @@
     /* max-height: 70vh; */
     /* overflow-y: scroll; */
 }
+
+
+@media screen and (max-width: 835px) {
+ 
+  .heading{
+      font-size: 28px;
+  }
+
+}
+
+@media screen and (max-width: 700px) {
+  .heading{
+    font-size: 32px;
+  }
+  .home{
+    margin: 0;
+  }
+  .homeNav{
+    height: 60px;
+  }
+}

@@ -38,3 +38,20 @@
 .searchBar:focus{
     outline:none;
 }
+
+@media screen and (max-width: 835px) {
+
+    .search{
+        margin-bottom: 20px;
+    }
+    
+    .searchIcon{
+        padding-right:15px;
+    }
+    
+    .searchBar{
+        height:44px;
+        padding-left:16px;
+        font-size: 16px;
+    }
+}

@@ -2,7 +2,7 @@ input[type="range"] {
     --range-progress: 0;
     margin-top:24px;
     /* ... */
-    width: 75%;
+    width: 80%;
     height: 6px;
     border-radius: 16px;
     background-color: #393634;
@@ -24,3 +24,10 @@ input[type="range"] {
     width: var(--range-progress);
   }
   
+
+@media screen and (max-width: 700px) {
+    input[type="range"] {
+      margin-top:24px;
+      width: 100%;
+    }
+}

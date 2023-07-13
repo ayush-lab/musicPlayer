@@ -1,6 +1,6 @@
 .controls_wrapper{
     margin-top:8px;
-    width: 75%;
+    width: 80%;
 }
 .controls{
     display: flex;
@@ -21,4 +21,10 @@
 
 .prev img, .next img, .sound img, .pause img, .menu img{
     width:100%;
+}
+
+@media screen and (max-width: 700px) {
+    .controls_wrapper{
+        width: 100%;
+    }
 }

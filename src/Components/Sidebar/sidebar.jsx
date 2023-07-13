@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import SpotifyLogo from '../../assets/images/spotifyLogo.svg'
 import {redirectRoute} from "../../redux/action/action"
 import { connect, useDispatch } from "react-redux";
-
+import './sidebar.css'
 
 const Sidebar = (props) => {
     const[isOpen ,setIsOpen] = useState(true);
@@ -41,25 +41,54 @@ const Sidebar = (props) => {
         <div className="container">
            <div className="sidebar">
                <div className="top_section">
-                   <div style={{display: isOpen ? "block" : "none"}} className="logo">
+               
+               <div className="collapseMenu">
+                    <div className={"hamburger"} onClick={()=>setIsOpen((prev)=>!prev)}>
+                        <i className="fa-solid fa-bars on" id="on"></i>
+                    </div>
+
+                    <div className={isOpen ? "menu" : "menuOpen" }>
+                        <div className="navigation">
+                            <div onClick={()=>setIsOpen((prev)=>!prev)}>
+                                <i class="fa fa-window-close" aria-hidden="true"></i>
+                            </div>
+                            {
+                                menuItem.map((item, index)=>{
+                                var activeClass = currentPath === item.path ? "link_text active link" : "link_text link"
+
+                            return(
+
+                                    <div key={index}
+                                            onClick={()=>redirectionHandler(item.path)}
+                                            className={activeClass}>{item.name}
+                                        </div>
+                                )})
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+                   <div className="logo">
                         <img src={SpotifyLogo} alt="logo"/>
                    </div>
         
                </div>
-               {
-                   menuItem.map((item, index)=>{
-                    var activeClass = currentPath === item.path ? "link_text active link" : "link_text link"
+               <div className="sidebarMenu">
+                    {
+                        menuItem.map((item, index)=>{
+                            var activeClass = currentPath === item.path ? "link_text active link" : "link_text link"
 
-                   return(
+                        return(
 
-                           <div key={index}
-                                style={{display: isOpen ? "block" : "none"}} 
-                                // activeclassName="active"
-                                onClick={()=>redirectionHandler(item.path)}
-                                className={activeClass}>{item.name}
-                            </div>
-                   )})
-               }
+                                <div key={index}
+                                        style={{display: isOpen ? "block" : "none"}} 
+                                        onClick={()=>redirectionHandler(item.path)}
+                                        className={activeClass}>{item.name}
+                                    </div>
+                        )})
+                    }
+               </div>
            </div>
            <main>{props.children}</main>
         </div>

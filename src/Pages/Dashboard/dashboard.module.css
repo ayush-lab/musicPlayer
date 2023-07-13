@@ -1,6 +1,6 @@
 .main{
     width:80vw;
-    height:150vh;;
+    height:250vh;;
     display:flex;
     gap:24px;
 }
@@ -13,3 +13,42 @@
     width: 55%;
     /* background:pink; */
 }
+
+@media screen and (max-width: 1024px) {
+    .main{
+        width: 100vw;
+        padding-left:60px;
+        height:auto;
+        min-height:100vh;
+        margin-top: 60px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .main{
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        gap:0;
+    }
+
+    .main_home{
+        width: 80%;
+    }
+
+    .main{
+        padding-left:0px;
+    }
+
+    .main_musicPlayer{
+        width: 60%;
+    }
+    
+}
+/* 
+@media screen and (max-width: 700px) {
+    .main{
+
+    }
+} */
