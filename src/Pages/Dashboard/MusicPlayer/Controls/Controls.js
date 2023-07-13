@@ -40,7 +40,6 @@ const Controls=(props)=>{
     const nextTrackHandler = () =>{
         const currentIndex = props?.data?.filter?.currentIndex;
         const songsCount = props?.data?.filter?.songs.length;
-        console.log("songsCount: " + songsCount)
         if(currentIndex === songsCount -1 ){
             dispatch(selectCurrentSong(0));
         }

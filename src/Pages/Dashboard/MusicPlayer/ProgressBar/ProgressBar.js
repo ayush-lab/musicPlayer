@@ -5,7 +5,7 @@ const ProgressBar = ({progressBarRef,audioRef,timeProgress,duration}) => {
 
     const handleProgressBar = ()=>{
         audioRef.current.currentTime = progressBarRef.current.value;
-        console.log(progressBarRef.current.value);
+        // console.log(progressBarRef.current.value);
     }
 
     

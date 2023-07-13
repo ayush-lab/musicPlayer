@@ -1,9 +1,10 @@
 import styles from './home.module.css';
 import SearchBar from '../../../Components/SearchBar/Searchbar';
 import SongBar from '../../../Components/SongBar/SongBar';
-import { getSongs, clearData, selectCurrentSong} from '../../../redux/action/action';
+import { getSongs} from '../../../redux/action/action';
 import { connect, useDispatch } from "react-redux";
 import { useEffect, useState } from 'react';
+import { Audio } from 'react-loader-spinner'
 
 
 const Home = (props)=>{
@@ -15,12 +16,11 @@ const Home = (props)=>{
     useEffect(()=>{
         dispatch(getSongs(1))
 
-        console.log(props.data.filter)
-        return ()=>{
-            console.log("clearing the data")
-        }
+        // console.log(props.data.filter)
 
     },[])
+
+    var songs = props?.data?.filter?.songs;
 
     
     return(
@@ -31,7 +31,16 @@ const Home = (props)=>{
                 </div>
                 <SearchBar setQuery={setQuery} query={query}/>
                 <div className={styles.songbars}>
-                    {props.data.filter.songs.filter(song=>{
+                    {songs.length===0 ? <div className={styles.loader}><Audio
+                        height="50"
+                        width="50"
+                        radius="9"
+                        color="green"
+                        ariaLabel="loading"
+                        wrapperStyle
+                        wrapperClass
+                    /></div>
+                    : songs.filter(song=>{
                         if( query === ' ') return song;
                         else if( song.title.toLowerCase().includes(query.toLowerCase()) ||
                                 song.artist.toLowerCase().includes(query.toLowerCase()) ) return song;
