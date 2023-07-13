@@ -1,26 +1,34 @@
 import { useState, useEffect, useCallback, useRef} from 'react';
 import styles from './controls.module.css';
+import { connect, useDispatch } from "react-redux";
 import Menu from '../../../../assets/images/menu.png';
 import Pause from '../../../../assets/images/pause.png';
 import Next from '../../../../assets/images/next.png';
 import Prev from '../../../../assets/images/prev.png';
 import Sound from '../../../../assets/images/sound.png';
 import Play from '../../../../assets/images/play.svg';
+import Unmute from '../../../../assets/images/unmute.svg';
+import { restart, selectCurrentSong } from '../../../../redux/action/action';
 
 
 
-const Controls=({audioRef,setTimeProgress,progressBarRef,duration})=>{
+const Controls=(props)=>{
     const [isPlaying, setIsPlaying] = useState(false)
+    const [isMute,setMute] = useState(false)
+    const dispatch = useDispatch();
     const playAnimationRef = useRef()
+    const audioRef=props.audioRef;
+    const setTimeProgress = props.setTimeProgress
+    const progressBarRef=props.progressBarRef
+    const duration=props.duration
 
     const repeat = useCallback(() => {
-        console.log('run');
-        const currentTime = audioRef.current.currentTime;
+        const currentTime = audioRef?.current?.currentTime;
         setTimeProgress(currentTime);
-        progressBarRef.current.value = currentTime;
-        progressBarRef.current.style.setProperty(
+        if(progressBarRef?.current?.value) progressBarRef.current.value=currentTime;
+        progressBarRef?.current?.style.setProperty(
             '--range-progress',
-            `${(progressBarRef.current.value / duration) * 100}%`
+            `${(progressBarRef?.current?.value / duration) * 100}%`
           );
         playAnimationRef.current = requestAnimationFrame(repeat);
       },[audioRef, duration, progressBarRef, setTimeProgress]);
@@ -29,6 +37,41 @@ const Controls=({audioRef,setTimeProgress,progressBarRef,duration})=>{
         setIsPlaying((prevState) => !prevState);
       };
 
+    const nextTrackHandler = () =>{
+        const currentIndex = props?.data?.filter?.currentIndex;
+        const songsCount = props?.data?.filter?.songs.length;
+        console.log("songsCount: " + songsCount)
+        if(currentIndex === songsCount -1 ){
+            dispatch(selectCurrentSong(0));
+        }
+        else {
+          dispatch(selectCurrentSong(currentIndex+1));
+        }
+        dispatch(restart(true))
+
+    }
+
+    const PrevTrackHandler = () =>{
+        const currentIndex = props?.data?.filter?.currentIndex;
+        const songsCount = props?.data?.filter?.songs.length;
+        if(currentIndex === 0){
+            dispatch(selectCurrentSong(songsCount-1));
+        }
+        else dispatch(selectCurrentSong(currentIndex-1));
+
+        dispatch(restart(true))
+
+    }
+
+    const muteHandler=()=>{
+        if(audioRef.current.volume === 0){
+          audioRef.current.volume = 1;
+        }
+        else audioRef.current.volume = 0;
+        
+        setMute((prev)=>!prev);
+    }
+
     useEffect(() => {
         if (isPlaying) {
           audioRef.current.play();
@@ -36,6 +79,7 @@ const Controls=({audioRef,setTimeProgress,progressBarRef,duration})=>{
           audioRef.current.pause();
         }
         playAnimationRef.current = requestAnimationFrame(repeat);
+
       }, [isPlaying, audioRef, repeat]);
 
     return(
@@ -47,7 +91,7 @@ const Controls=({audioRef,setTimeProgress,progressBarRef,duration})=>{
 
                     <div className={styles.player}>
 
-                        <div className={styles.prev}>
+                        <div className={styles.prev} onClick={PrevTrackHandler}>
                             <img src={Prev} alt={"prev"}/>
                         </div>
                         
@@ -55,14 +99,14 @@ const Controls=({audioRef,setTimeProgress,progressBarRef,duration})=>{
                              <img src={isPlaying ? Play : Pause} alt={"pause"}/>
                         </div>
 
-                        <div className={styles.next}>
+                        <div className={styles.next} onClick={nextTrackHandler}>
                             <img src={Next} alt={"next"}/>
                         </div>
                     </div>
 
-                    <div className={styles.sound}>
+                    <div className={styles.sound} onClick={muteHandler}>
                         <div className={styles.soundIcon}>
-                            <img src={Sound} alt={"sound"}/>
+                            <img src={isMute ? Unmute : Sound} alt={"sound"}/>
                         </div>
                     </div>
 
@@ -71,4 +115,13 @@ const Controls=({audioRef,setTimeProgress,progressBarRef,duration})=>{
         )
 }
 
-export default Controls;
+const mapStateToProps = (state, props) => {
+    return {
+      data: state
+    };
+  };
+  
+
+export default (
+    connect(mapStateToProps)(Controls)
+  );

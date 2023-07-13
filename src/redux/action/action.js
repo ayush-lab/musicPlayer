@@ -9,12 +9,28 @@ export const clearData = () => {
     }
 }
 
-export const selectCurrentSong = (data) => {
+export const selectCurrentSong = (index) => {
   return{
     type: 'SELECT_CURRENT_SONG',
-    data: data
+    data: index
   }
 }
+
+export const redirectRoute = (path) => {
+  return{
+    type: 'REDIRECT_PATH',
+    data: path
+  }
+}
+
+export const restart = (value) => {
+  return{
+    type: 'RESTART_SONG',
+    data: value
+  }
+}
+
+
 
 
 export const getSongs = (playlistId) => {

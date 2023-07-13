@@ -1,11 +1,13 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect} from 'react';
 import DisplayTrack from './DisplayTrack/DisplayTrack';
 import ProgressBar from './ProgressBar/ProgressBar';
 import styles from './musicPlayer.module.css';
 import Controls from './Controls/Controls';
+import { connect } from "react-redux";
 
-const MusicPlayer = ()=>{
-    const [currentTrack, setCurrentTrack] = useState("https://storage.googleapis.com/similar_sentences/Imagine%20Dragons%20-%20West%20Coast%20(Pendona.com).mp3");
+
+const MusicPlayer = (props)=>{
+    const [currentTrack, setCurrentTrack] = useState(props?.data?.filter?.currentSong?.url);
     const [timeProgress, setTimeProgress] = useState(0);
     const [duration, setDuration] = useState(0);
     const audioRef = useRef();
@@ -37,4 +39,13 @@ const MusicPlayer = ()=>{
     )
 }
 
-export default MusicPlayer
+const mapStateToProps = (state, props) => {
+    return {
+      data: state
+    };
+  };
+  
+  
+export default (
+    connect(mapStateToProps)(MusicPlayer)
+  );

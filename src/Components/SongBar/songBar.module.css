@@ -12,6 +12,8 @@
 .bar:hover{
     cursor: pointer;
     background-color:  #262626;
+    /* background: rgba(255, 255, 255, 0.08); */
+
 }
 
 .artist_detail{

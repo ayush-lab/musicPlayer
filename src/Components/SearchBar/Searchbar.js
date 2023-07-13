@@ -3,11 +3,10 @@ import SearchIcon from './../../assets/images/searchIcon.svg';
 import { useState } from 'react';
 
 
-const SearchBar = ()=>{
-    const [searchValue,setSearchValue] = useState("");
+const SearchBar = ({setQuery,query})=>{
 
     const handleClick =(event)=>{
-        setSearchValue(event.target.value);
+        setQuery(event.target.value);
     }
 
 
@@ -15,7 +14,7 @@ const SearchBar = ()=>{
                 <input className={styles.searchBar} 
                        placeholder={"Search Song, Artist"}
                        onChange={handleClick}
-                       value={searchValue}/>
+                       value={query}/>
 
                 <div className={styles.searchIcon}>
                     <img src={SearchIcon} alt="searchIcon"/>

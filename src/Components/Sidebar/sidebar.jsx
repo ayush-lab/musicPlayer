@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import SpotifyLogo from '../../assets/images/spotifyLogo.svg'
+import {redirectRoute} from "../../redux/action/action"
+import { connect, useDispatch } from "react-redux";
 
 
-const Sidebar = ({children}) => {
+const Sidebar = (props) => {
     const[isOpen ,setIsOpen] = useState(true);
     const toggle = () => setIsOpen (!isOpen);
+    const dispatch = useDispatch();
+
     const menuItem=[
         {
-            path:"/home",
+            path:"/",
             name:"For you",
         },
         {
@@ -20,11 +24,19 @@ const Sidebar = ({children}) => {
             name:"Favorites",
         },
         {
-            path:"/profile/history",
+            path:"/history",
             name:"Recently Played",
         }
        
     ]
+
+    const redirectionHandler=(data)=>{
+        dispatch(redirectRoute(data))
+    }
+
+
+    const currentPath = props?.data?.filter?.path
+    
     return (
         <div className="container">
            <div className="sidebar">
@@ -35,17 +47,33 @@ const Sidebar = ({children}) => {
         
                </div>
                {
-                   menuItem.map((item, index)=>(
-                       <NavLink to={item.path} key={index} className="link" >
-                           {/* <div className="icon">{item.icon}</div> */}
-                           <div style={{display: isOpen ? "block" : "none"}} activeclassName="active" className="link_text">{item.name}</div>
-                       </NavLink>
-                   ))
+                   menuItem.map((item, index)=>{
+                    var activeClass = currentPath === item.path ? "link_text active link" : "link_text link"
+
+                   return(
+
+                           <div key={index}
+                                style={{display: isOpen ? "block" : "none"}} 
+                                // activeclassName="active"
+                                onClick={()=>redirectionHandler(item.path)}
+                                className={activeClass}>{item.name}
+                            </div>
+                   )})
                }
            </div>
-           <main>{children}</main>
+           <main>{props.children}</main>
         </div>
     );
 };
 
-export default Sidebar;
+const mapStateToProps = (state, props) => {
+    return {
+      data: state
+    };
+  };
+  
+
+export default (
+    connect(mapStateToProps)(Sidebar)
+  );
+

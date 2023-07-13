@@ -1,13 +1,26 @@
 input[type="range"] {
     --range-progress: 0;
+    margin-top:24px;
     /* ... */
+    width: 75%;
+    height: 6px;
+    border-radius: 16px;
+    background-color: #393634;
+    /* -webkit-appearance: none; */
   }
+
+  input[type=range]:focus {
+    outline: none;
+  }
+
   
   input[type="range"]::before {
-    /* ... */
-    background: rgba(255, 255, 255, 1);
-    /* background: #f50; */
+    background: #f50 !important;  
     width: var(--range-progress);
-    /* ... */
+  }
+  
+  input[type="range"]::after {
+    background: red;
+    width: var(--range-progress);
   }
   
