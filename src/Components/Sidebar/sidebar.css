@@ -92,13 +92,14 @@
 }
 
 .hamburger{
-  cursor: pointer;
   position: absolute;
   top:28px;
 }
 
 .hamburger i{
   font-size: 30px;
+  cursor: pointer;
+
 }
 
 .navigation i{
